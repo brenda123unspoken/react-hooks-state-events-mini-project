@@ -1,0 +1,319 @@
+State and Events Quiz
+Due No due date Points 14 Questions 14 Time limit None Allowed attempts 3
+This quiz is no longer available as the course has been concluded.
+Attempt history
+Attempt	Time	Score
+KEPT	Attempt 2	14 minutes	10.33 out of 14
+LATEST	Attempt 2	14 minutes	10.33 out of 14
+Attempt 1	28 minutes	10.33 out of 14
+ Answers will be shown after your last attempt
+Score for this attempt: 10.33 out of 14
+Submitted 13 Jun 2024 at 15:10
+This attempt took 14 minutes.
+ 
+IncorrectQuestion 1
+0 / 1 pts
+We're building a feature in a React application to allow users to search for particular items. When the user enters some text in the SearchBar component, the ItemList component should update which Item components are being displayed.
+
+Here's the component hierarchy:
+
+App
+├─── SearchBar
+└─── ItemList
+    ├─── Item
+    └─── Item
+To build this feature, which component would need to hold the searchTextstate?
+
+  I don't know
+  Item 
+  App 
+  SearchBar 
+Since both the SearchBar and ItemList components need access to this state, this state would need to be held in their closest common parent, which is App.
+  ItemList 
+Source/s:
+
+React Information Flow
+ 
+Question 2
+1 / 1 pts
+A controlled component is a component that derives its input values from ____.
+state
+Source/s:
+
+Controlled Components
+ 
+IncorrectQuestion 3
+0 / 1 pts
+Any time you want to make a change (adding, updating or deleting an item) to an array that's being stored in state, you first need to make a copy of the array using the spread operator.
+  True 
+Using the spread operator isn't always necessary when updating state with an array. The important thing is that whatever value is passed to the setter function for that state is a new object rather than a reference to an existing object.
+
+You can use other array methods, like map or filter, to produce a new object; it doesn't need to be the spread operator exclusively.
+
+  False 
+Source/s:
+
+React State and Arrays
+ 
+Question 4
+1 / 1 pts
+Fill in the blanks:
+
+props
+ is data passed down to a child component from a parent component.
+
+state
+ is data held internally by React that can be accessed in a component, and can change over time.
+
+Answer 1:
+props
+Answer 2:
+state
+Source/s:
+
+React State
+Props Basics
+ 
+Question 5
+1 / 1 pts
+Event listeners cannot be attached directly to our custom React components.
+  True 
+Right! We can't attach event listeners directly to components, like this:
+
+function App() {
+  return <MyButton onClick={handleClick} />;
+}
+Event listeners can only be attached to DOM elements in JSX, like this:
+
+function App() {
+  return <button onClick={handleClick}>Click Me!button>;
+}
+  False 
+Source/s:
+
+Event Handling in React
+ 
+Question 6
+1 / 1 pts
+For each desired change to an array that's being stored in state, select the most appropriate method/operator to use:
+Adding an item to an array 
+spread operator
+Removing an item from an array 
+filter
+Updating an item in an array 
+map
+Source/s:
+
+React State and Arrays
+ 
+Question 7
+1 / 1 pts
+Given the following components:
+
+function Parent() {
+  const [isOn, setIsOn] = useState(true);
+
+  return <Child />;
+}
+
+function Child() {
+  return <button>Togglebutton>;
+}
+In order to update the isOn state in the component when the button is clicked in the component, you would need to:
+
+  Pass a callback function as a prop from the to the, and call it from the `` component.
+Right! We would need to do something like this:
+
+function Parent() {
+  const [isOn, setIsOn] = useState(true);
+
+  return <Child isOn={isOn} onToggleClick={setIsOn} />;
+}
+
+function Child({ isOn, onToggleClick }) {
+  return <button onClick={() => onToggleClick(!isOn)}>Togglebutton>;
+}
+  Export the setState() function from the , and import it so that you can call it from the component.
+  I don't know.
+  Data only flows downward in React so it is not possible to change the component's state from the component.
+Source/s:
+
+React Information Flow
+ 
+Question 8
+1 / 1 pts
+Given the following component:
+
+function App() {
+  const [numbers, setNumbers] = useState([]);
+
+  function addNumber() {
+    numbers.push(1);
+    setNumbers(numbers);
+  }
+
+  return <button onClick={addNumber}>Addbutton>;
+}
+Clicking the button would cause the component to re-render.
+
+  True 
+  False 
+Correct!
+
+Since we're passing a reference to the same numbers variable tosetNumbers, React will not re-render our component. We would need to make a copy of the numbers array before calling setNumbers, like this:
+
+function addNumber() {
+  const newNumbers = [...numbers, 1];
+  setNumbers(newNumbers);
+}
+Source/s:
+
+React State and Arrays
+ 
+IncorrectQuestion 9
+0 / 1 pts
+Select all that apply. Setting up a controlled form requires :
+  Moving state out of the form component and into a parent component. 
+While holding state in a parent component is necessary in some scenarios, such as when multiple components depend on the same state from the form input fields, it is not required.
+  Validating the information the user enters. 
+Validating user information is helpful, but it is not required when setting up a controlled form.
+  Updating the information in an input field to reflect state. 
+Correct! To ensure our form always matches our component state , we need to synchronize the value of each input field with state:
+
+<input type="text" onChange={(e) => setName(e.target.value)} value={name} />
+  Setting up an event listener to update state as the user enters data in an input field.
+Right! To ensure that our component state always matches the data in the form , we need to update state any time the input changes:
+
+<input type="text" onChange={(e) => setName(e.target.value)} value={name} />
+Source/s:
+
+Controlled Components
+ 
+Question 10
+1 / 1 pts
+Given the following component hierarchy:
+
+App
+├─── SearchBar
+└─── ItemList
+    ├─── Item
+    └─── Item
+It's possible for the ItemList component to access state that is contained in the SearchBar component.
+
+  True 
+  False 
+Right! Sibling components have no way of accessing each others' state directly. The state would need to be stored in the App component in order for theItemList and the SearchBar component both to be able to access that state.
+Source/s:
+
+React Information Flow
+ 
+Question 11
+1 / 1 pts
+React will always re-render a component when the setState function is called.
+  True 
+  False 
+Correct! React will only re-render a component when setState is called with a new object. For example, this code would not cause a re-render:
+
+function Counter() {
+  const [nums, setNums] = useState([]);
+
+  function handleClick() {
+    nums.push(1);
+    setNums(nums);
+  }
+
+  return <button onClick={handleClick}>Addbutton>;
+}
+Since we are passing a reference to same nums object in memory, React will not re-render our component. We'd need to pass a new object to setNumsinstead:
+
+function Counter() {
+  const [nums, setNums] = useState([]);
+
+  function handleClick() {
+    const newNums = [...nums, 1];
+    setNums(newNums);
+  }
+
+  return <button onClick={handleClick}>Addbutton>;
+}
+Source/s:
+
+React State
+React State and Arrays
+ 
+Question 12
+1 / 1 pts
+When useState() is called, it returns:
+  A single value representing the current state 
+  
+An array containing:
+
+the current value for state
+a function to update that value
+Right! Calling useState always returns an array, which we typically assign to two variables using array destructuring syntax:
+
+const [count, setCount] = useState(1);
+  I don't know.
+Source/s:
+
+React State
+ 
+PartialQuestion 13
+0.33 / 1 pts
+Which of the following are advantages of using controlled components? Select all that apply.
+  I don't know.
+  It allows us to ensure that input values are valid. 
+By using a controlled form, it easily allows us to implement validations.
+  It allows us to make the input values available to other components in our app. 
+When using a controlled form, we are able to use state to pass the form values into other components!
+  It allows us to keep the code that handles logic separate from the code that handles display of data.
+  It helps us keep the amount of code we need to a minimum. 
+Using controlled components typically involves writing more code than uncontrolled components, but there are several advantages that can make the extra code worthwhile!
+Source/s:
+
+Controlled Components
+ 
+Question 14
+1 / 1 pts
+Which of the following shows the correct way to set up an event listener that passes a value to the callback function, and prints Hello World!! to the console when the button is clicked?
+  
+function MyButton() {
+  function handleClick(val) {
+    console.log(val + "!!");
+  }
+  return (
+    <div>
+      <button onClick={handleClick}>Click Me!button>
+    div>
+  );
+}
+  I don't know.
+  
+function MyButton() {
+  function handleClick(val) {
+    console.log(val + "!!");
+  }
+  return (
+    <div>
+      <button onClick={() => handleClick("Hello World")}>Click Me!button>
+    div>
+  );
+}
+Nice! Remember, onClick expects a callback function as an argument. By defining an arrow function here, we're able to pass a callback function that will call the handleClick function with the correct data.
+  
+function MyButton() {
+  function handleClick(val) {
+    console.log(val + "!!");
+  }
+  return (
+    <div>
+      <button onClick={handleClick("Hello World")}>Click Me!button>
+    div>
+  );
+}
+  More than one of the above will work. 
+Source/s:
+
+React Information Flow
+Quiz score: 10.33 out of 14
+Last
